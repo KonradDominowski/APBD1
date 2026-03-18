@@ -3,7 +3,7 @@
 public abstract class Equipment
 {
     public static int MaxId = 0;
-    public int Id { get; set; }
+    public int Id { get; }
     public string Name { get; set; }
     public EquipmentState State { get; set; }
     

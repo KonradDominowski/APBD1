@@ -3,13 +3,13 @@
 public class Projector : Equipment
 {
     public int Resolution;
-    public int Brightness;
-    public int Contrast;
+    public int BrightnessInLumens;
+    public int ContrastToOne;
 
     public Projector(string name, int resolution, int brightness, int contrast) : base(name)
     {
         Resolution = resolution;
-        Brightness = brightness;
-        Contrast = contrast;
+        BrightnessInLumens = brightness;
+        ContrastToOne = contrast;
     }
 }
