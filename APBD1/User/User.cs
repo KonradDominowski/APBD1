@@ -1,15 +1,15 @@
-﻿using System.Reflection.Metadata;
-
-namespace APBD1.User;
+﻿namespace APBD1.User;
 
 public abstract class User
 {
-    public static int MaxId = 0;
+    public static int MaxId;
     public int Id { get; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public abstract int MaxRentalsAvailable { get; }
     public static List<User> Users = [];
+
+    public bool CanRent => Rental.GetUserRentals(this).Count < MaxRentalsAvailable;
 
 
     protected User(string firstName, string lastName)
@@ -43,7 +43,7 @@ public abstract class User
                         continue;
                 }
             }
-            
+
             Console.WriteLine("Błędna liczba!");
         }
     }
@@ -58,5 +58,25 @@ public abstract class User
         } while (string.IsNullOrWhiteSpace(input));
 
         return input!;
+    }
+
+    public override string ToString()
+    {
+        return $"{FirstName} {LastName}";
+    }
+
+    public static void showAvailableUsers()
+    {
+        Console.WriteLine("Lista dostępnych użytkowników:");
+        foreach (var user in GetAvailableUsersDictionary())
+            Console.WriteLine($"{user.Key}: {user.Value}");
+    }
+
+    public static Dictionary<int, User> GetAvailableUsersDictionary()
+    {
+        return Users
+            .Where(user => user.CanRent)
+            .Select((user, index) => new { user, index = index + 1 })
+            .ToDictionary(x => x.index, x => x.user);
     }
 }

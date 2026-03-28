@@ -5,9 +5,10 @@ using APBD1.User;
 using APBD1.Service;
 using OperatingSystem = APBD1.Equipment.OperatingSystem;
 
-var laptop = new Laptop("lap", 17, 10000, OperatingSystem.Linux);
-var laptop1 = new Laptop("lap", 17, 10000, OperatingSystem.Linux);
+var laptop = new Laptop("Laptop", 17, 10000, OperatingSystem.Linux);
+var laptop1 = new Laptop("Laptop 2", 17, 10000, OperatingSystem.Linux);
 
+laptop1.State = EquipmentState.Rented;
 
 var date = DateTime.Now;
 var date2 = DateTime.Now.AddDays(5);
